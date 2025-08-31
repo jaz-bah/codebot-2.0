@@ -8,11 +8,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Check, Copy, Edit, Loader2, Trash } from "lucide-react";
+import { Check, Copy, Edit, ExpandIcon, Loader2, Trash } from "lucide-react";
 import { useState } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { toast } from "sonner";
+import { Modal } from "../modal/Modal";
 import { Button } from "../ui/button";
 
 interface Props {
@@ -39,6 +40,7 @@ export default function CodePreview({
   // state
   const [isCopied, setIsCopied] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   // handle copy
   const copyCode = () => {
@@ -78,6 +80,14 @@ export default function CodePreview({
             className="cursor-pointer"
             size={"sm"}
             variant={"secondary"}
+            onClick={() => setIsOpen(true)}
+          >
+            <ExpandIcon />
+          </Button>
+          <Button
+            className="cursor-pointer"
+            size={"sm"}
+            variant={"secondary"}
             onClick={copyCode}
           >
             {isCopied ? (
@@ -110,7 +120,7 @@ export default function CodePreview({
           </Button>
         </CardAction>
       </CardHeader>
-      <CardContent className="flex flex-col gap-2 h-full">
+      <CardContent className="flex flex-col gap-2 h-full max-h-[400px]">
         <div className="w-full h-full">
           <SyntaxHighlighter
             className="h-full"
@@ -121,6 +131,18 @@ export default function CodePreview({
           </SyntaxHighlighter>
         </div>
       </CardContent>
+
+      <Modal title={name} open={isOpen} onOpenChange={setIsOpen} pathName={"presets"} >
+        <div className="w-full h-full">
+          <SyntaxHighlighter
+            className="h-full"
+            language={language}
+            style={oneDark}
+          >
+            {code}
+          </SyntaxHighlighter>
+        </div>
+      </Modal>
     </Card>
   );
 }

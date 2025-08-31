@@ -20,7 +20,7 @@ import {
   PencilRuler,
   Workflow,
 } from "lucide-react";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { ThemeToggle } from "../ThemeToggle";
 import { Button } from "../ui/button";
@@ -70,6 +70,8 @@ const items = [
 ];
 
 export function AppSidebar() {
+  const session = useSession();
+  
   return (
     <Sidebar collapsible="icon">
       <SidebarContent className="flex flex-col gap-4">
@@ -100,6 +102,7 @@ export function AppSidebar() {
         </SidebarGroup>
 
         <SidebarFooter>
+        {session.data?.user && <h2 className="text-center text-xl">{session.data.user.email}</h2>}
           <div className="flex gap-2">
             <Button
               className="cursor-pointer flex-1"
