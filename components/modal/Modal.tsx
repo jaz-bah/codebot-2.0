@@ -10,7 +10,7 @@ interface Props {
 export function Modal({ open, onOpenChange, title, children, pathName }: Props) {
   return (
     <Dialog open={open} onOpenChange={() => onOpenChange(!open)}>
-      <DialogContent className={`sm:max-w-full ${pathName === "presets" || pathName === "storage" ? "md:max-w-4xl" : "md:max-w-lg"}`}>
+      <DialogContent className={`sm:max-w-full ${pathName === "presets" || pathName === "storage" ? "md:max-w-4xl" : "md:max-w-lg"} ${pathName === "full-view" ? "md:max-w-[90vw]" : ""}`}>
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
         </DialogHeader>

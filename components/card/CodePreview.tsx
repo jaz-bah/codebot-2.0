@@ -132,8 +132,8 @@ export default function CodePreview({
         </div>
       </CardContent>
 
-      <Modal title={name} open={isOpen} onOpenChange={setIsOpen} pathName={"presets"} >
-        <div className="w-full h-full">
+      <Modal title={name} open={isOpen} onOpenChange={setIsOpen} pathName={"full-view"} >
+        <div className="w-full h-full max-h-[80vh]">
           <SyntaxHighlighter
             className="h-full"
             language={language}
