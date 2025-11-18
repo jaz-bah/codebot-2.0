@@ -10,6 +10,7 @@ import { AddPresetForm } from "./form/AddPresetForm";
 import { AddToolForm } from "./form/AddToolForm";
 import { Modal } from "./modal/Modal";
 import { Button } from "./ui/button";
+import { AddSnippetForm } from "./form/AddSnippetForm";
 
 export default function TopButtons() {
   const pathName = usePathname();
@@ -38,6 +39,10 @@ export default function TopButtons() {
     extensions: {
       title: "Add Extension",
       form: <AddExtensionForm closeModal={() => setOpen(false)} />,
+    },
+    "ide-snippets": {
+      title: "Add Snippet",
+      form: <AddSnippetForm closeModal={() => setOpen(false)} />,
     },
   };
 

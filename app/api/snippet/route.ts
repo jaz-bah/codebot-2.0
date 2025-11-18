@@ -1,50 +1,51 @@
 import { authOptions } from "@/lib/auth";
 import { connectToDatabase } from "@/lib/db";
-import Component from "@/models/component.model";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
+import Snippet from "@/models/snippet.model";
 
-export async function GET(req: NextRequest) {
+export async function GET(request: NextRequest) {
   const session = await getServerSession(authOptions);
-  if (!session) {
+  if (!session?.user?.id) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
-  console.log(req);
+
+  console.log(request);
+
   try {
     await connectToDatabase();
-
-    const userId = session.user.id as string;
-    const components = await Component.find({ userId });
-    return NextResponse.json({ components }, { status: 200 });
+    const userId: string = session.user.id as string;
+    const snippets = await Snippet.find({ userId });
+    return NextResponse.json({ snippets }, { status: 200 });
   } catch (error) {
+    console.log(error);
     return NextResponse.json(
-      { error: error || "Internal server error" },
+      { message: (error as Error).message },
       { status: 500 }
     );
   }
 }
 
-export async function POST(req: NextRequest) {
+export async function POST(request: NextRequest) {
   const session = await getServerSession(authOptions);
-  if (!session) {
+  if (!session?.user?.id) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   try {
     await connectToDatabase();
     const userId: string = session.user.id as string;
-    const { name, preview, files } = await req.json();
-
-    const component = await Component.create({
+    const { language, code } = await request.json();
+    const snippet = await Snippet.create({
       userId,
-      name,
-      preview,
-      files: files?.length ? files : [],
+      language,
+      code,
     });
-    return NextResponse.json({ component }, { status: 201 });
+    return NextResponse.json({ snippet }, { status: 201 });
   } catch (error) {
+    console.log(error);
     return NextResponse.json(
-      { error: error || "Internal server error" },
+      { message: (error as Error).message },
       { status: 500 }
     );
   }

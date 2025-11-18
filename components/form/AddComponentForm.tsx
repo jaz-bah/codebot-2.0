@@ -22,7 +22,19 @@ const formSchema = z.object({
     message: "Name must be at least 2 characters.",
   }),
   preview: z.instanceof(File),
-  url: z.string().url({ message: "Please enter a valid url." }),
+  files: z.array(
+    z.object({
+      name: z.string().min(2, {
+        message: "Name must be at least 2 characters.",
+      }),
+      language: z.string().min(2, {
+        message: "Language must be at least 2 characters.",
+      }),
+      code: z.string().min(2, {
+        message: "Code must be at least 2 characters.",
+      }),
+    })
+  ),
 });
 
 export function AddComponentForm({ closeModal }: Props) {
@@ -37,14 +49,15 @@ export function AddComponentForm({ closeModal }: Props) {
     defaultValues: {
       name: "",
       preview: undefined,
-      url: "",
+      files: [],
     },
   });
 
   // add component mutation
   const addComponentMutation = useMutation({
     mutationFn: (payload: IComponentPayload) => createComponentAction(payload),
-    onSuccess: () => {
+    onSuccess: (data) => {
+      console.log(data);
       toast.success("Component created successfully");
     },
     onError: () => {
@@ -102,20 +115,6 @@ export function AddComponentForm({ closeModal }: Props) {
                     field.onChange(file);
                   }}
                 />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="url"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Sandbox url</FormLabel>
-              <FormControl>
-                <Input placeholder="Enter url" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

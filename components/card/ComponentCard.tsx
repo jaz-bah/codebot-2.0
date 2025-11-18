@@ -25,7 +25,7 @@ export default function ComponentCard({ component, onDelete, isDeleting, deletin
 
         <div className="flex gap-2">
           <Button className="cursor-pointer flex-1" size={"sm"}>
-            <Link className="w-full" href={component.url} target="_blank">Code</Link>
+            <Link className="w-full" href={`/components/${component._id}`}>Code</Link>
           </Button>
 
           <Button

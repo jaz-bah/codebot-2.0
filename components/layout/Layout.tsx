@@ -38,7 +38,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
         </div>
         <div
-          className={`${pathName.includes("/components/") || pathName.includes("/css-tree") ? "px-0" : "px-4"}`}
+          className={`${pathName.includes("/components/") || pathName.includes("/css-tree") || pathName.includes("/ide-snippets") ? "px-0" : "px-4"}`}
 
         >
           {children}

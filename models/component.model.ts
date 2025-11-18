@@ -15,9 +15,15 @@ const componentSchema = new Schema<IComponent>(
             type: String,
             required: true,
         },
-        url: {
-            type: String,
-            required: true,
+        files: {
+            type: [
+                {
+                    name: String,
+                    language: String,
+                    code: String,
+                },
+            ],
+            default: [],
         },
     },
     {

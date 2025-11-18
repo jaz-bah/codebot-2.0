@@ -12,18 +12,21 @@ import {
 } from "@/components/ui/sidebar";
 import {
   Blocks,
+  Braces,
   Code,
   Component,
   File,
   GitFork,
   MemoryStick,
   PencilRuler,
+  SquareChevronRight,
   Workflow,
 } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { ThemeToggle } from "../ThemeToggle";
 import { Button } from "../ui/button";
+import { usePathname } from "next/navigation";
 
 // Menu items.
 const items = [
@@ -63,6 +66,16 @@ const items = [
     icon: GitFork,
   },
   {
+    title: "Commands",
+    url: "/commands",
+    icon: SquareChevronRight,
+  },
+  {
+    title: "IDE Snippets",
+    url: "/ide-snippets",
+    icon: Braces,
+  },
+  {
     title: "Workplace",
     url: "/workplace",
     icon: Workflow,
@@ -71,7 +84,8 @@ const items = [
 
 export function AppSidebar() {
   const session = useSession();
-  
+  const pathname = usePathname();
+
   return (
     <Sidebar collapsible="icon">
       <SidebarContent className="flex flex-col gap-4">
@@ -89,7 +103,10 @@ export function AppSidebar() {
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
+                  <SidebarMenuButton
+                    asChild
+                    className={pathname === item.url ? "bg-accent" : ""}
+                  >
                     <Link href={item.url} prefetch={true}>
                       <item.icon />
                       <span>{item.title}</span>
@@ -102,7 +119,9 @@ export function AppSidebar() {
         </SidebarGroup>
 
         <SidebarFooter>
-        {session.data?.user && <h2 className="text-center text-xl">{session.data.user.email}</h2>}
+          {session.data?.user && (
+            <h2 className="text-center text-xl">{session.data.user.email}</h2>
+          )}
           <div className="flex gap-2">
             <Button
               className="cursor-pointer flex-1"

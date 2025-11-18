@@ -7,13 +7,12 @@ export interface ICodeData {
   code: string;
 }
 
-export interface ITableData  {
+export interface ITableData {
   _id: string;
   name: string;
   note: string;
   url: string;
-};
-
+}
 
 export interface ICharDiff {
   charOne: string;
@@ -26,4 +25,12 @@ export interface ICompareResult {
   identical: boolean;
 }
 
+export interface ICommandCard {
+  title: string;
+  commands: ICommand[];
+}
 
+export interface ICommand {
+  cmd: string;
+  desc: string;
+}
