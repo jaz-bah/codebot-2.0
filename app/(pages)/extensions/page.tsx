@@ -5,7 +5,6 @@ import {
 } from "@/actions/extension.action";
 import Header from "@/components/Header";
 import Loader from "@/components/layout/Loader";
-import CommingSoon from "@/components/section/CommingSoon";
 import { JBTable } from "@/components/table/JBTable";
 import { useQuery } from "@tanstack/react-query";
 
@@ -16,8 +15,8 @@ export default function Page() {
   }); 
 
   return (
-    <div className="w-full h-full">
-      {/* <Header title="Extensions" />
+    <div className="py-4 flex flex-col gap-4 w-4xl mx-auto max-w-full">
+      <Header title="Extensions" />
 
       {isLoading && <Loader />}
       {extensions && (
@@ -27,8 +26,7 @@ export default function Page() {
           tableData={extensions}
           deleteAction={deleteExtensionAction}
         />
-      )} */}
-      <CommingSoon />
+      )}
     </div>
   );
 }

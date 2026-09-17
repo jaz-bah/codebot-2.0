@@ -67,17 +67,17 @@ const items = [
   },
   {
     title: "Extensions",
-    url: "/extensions",
+    url: "/coming-soon",
     icon: Blocks,
   },
   {
     title: "CSS Tree",
-    url: "/css-tree",
+    url: "/coming-soon",
     icon: GitFork,
   },
   {
     title: "IDE Snippets",
-    url: "/ide-snippets",
+    url: "/coming-soon",
     icon: Braces,
   },
 ];
@@ -105,7 +105,7 @@ export function AppSidebar() {
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton
                     asChild
-                    className={pathname === item.url ? "bg-accent" : ""}
+                    className={pathname === item.url && item.url !== "/coming-soon" ? "bg-accent" : ""}
                   >
                     <Link href={item.url} prefetch={true}>
                       <item.icon />

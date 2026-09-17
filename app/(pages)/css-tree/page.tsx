@@ -1,7 +1,6 @@
 "use client"
 
 import { generateCssTree } from "@/actions/cssTree.action";
-import CommingSoon from "@/components/section/CommingSoon";
 import { Button } from "@/components/ui/button";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { handleEditorDidMount } from "@/helper/EditorMount";
@@ -51,8 +50,7 @@ export default function Page() {
     }
 
     return (
-        <div className="w-full">
-            {/* 
+        <div className="w-full grid grid-cols-2">
             <div className="col-span-2 p-2">
                 <div className="flex justify-end items-center gap-5">
                     <ToggleGroup className="border-1 border-gray-300" type="single" defaultValue="scss" onValueChange={setCssType}>
@@ -83,6 +81,7 @@ export default function Page() {
                     height="calc(100vh - 120px)"
                     defaultLanguage={"css"}
                     onMount={handleEditorDidMount}
+                    value={valueCss ? valueCss : "/*css here...*/"}
                     onChange={(value) => setValueCss(value || "")}
                     options={{
                         lineNumbers: "on",
@@ -91,9 +90,6 @@ export default function Page() {
                     }}
                 />
             </div>
-            */}
-
-                <CommingSoon />
         </div>
     )
 }

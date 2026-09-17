@@ -5,7 +5,6 @@ import {
   updateSnippetAction,
 } from "@/actions/snippet.action";
 import Loader from "@/components/layout/Loader";
-import CommingSoon from "@/components/section/CommingSoon";
 import { Button } from "@/components/ui/button";
 import { handleEditorDidMount } from "@/helper/EditorMount";
 import { ISnippetPayload, ISnippetResponse } from "@/types/snippets.type";
@@ -75,14 +74,15 @@ export default function SnippetPage() {
   };
 
   return (
-    <div className="w-full h-full">
-      {/* <div className="w-full grid grid-cols-12 h-[calc(100vh-60px)]">
+    <div className="w-full h-full flex justify-center items-center">
+      <div className="w-full grid grid-cols-12 h-[calc(100vh-60px)]">
         {isLoading ? (
           <div className="col-span-12 flex justify-center items-center">
             <Loader />
           </div>
         ) : (
           <>
+            {/* Sidebar */}
             <div className="col-span-2 h-full bg-accent border-r p-2 flex flex-col justify-between gap-2">
               <div className="flex flex-col gap-2">
                 {snippets?.map((snippet: ISnippetResponse) => (
@@ -118,6 +118,7 @@ export default function SnippetPage() {
               </div>
             </div>
 
+            {/* Editor Section */}
             <div className="col-span-10 h-full">
               {selectedSnippet ? (
                 <Editor
@@ -142,9 +143,7 @@ export default function SnippetPage() {
             </div>
           </>
         )}
-      </div> */}
-
-      <CommingSoon />
+      </div>
     </div>
   );
 }
