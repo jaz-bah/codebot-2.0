@@ -53,9 +53,9 @@ export default function Page() {
             <Link href={"/gradient"}>Gradient</Link>
           </Button>
 
-          <Button asChild>
+          {/* <Button asChild>
             <Link href={"/glassmorphism"}>Glassmorphism</Link>
-          </Button>
+          </Button> */}
         </Card>
       </div>
     </div>

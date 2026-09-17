@@ -56,6 +56,16 @@ const items = [
     icon: PencilRuler,
   },
   {
+    title: "Commands",
+    url: "/commands",
+    icon: SquareChevronRight,
+  },
+  {
+    title: "Workplace",
+    url: "/workplace",
+    icon: Workflow,
+  },
+  {
     title: "Extensions",
     url: "/extensions",
     icon: Blocks,
@@ -66,19 +76,9 @@ const items = [
     icon: GitFork,
   },
   {
-    title: "Commands",
-    url: "/commands",
-    icon: SquareChevronRight,
-  },
-  {
     title: "IDE Snippets",
     url: "/ide-snippets",
     icon: Braces,
-  },
-  {
-    title: "Workplace",
-    url: "/workplace",
-    icon: Workflow,
   },
 ];
 
